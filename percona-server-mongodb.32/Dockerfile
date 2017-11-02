@@ -1,6 +1,8 @@
 FROM debian:jessie
 MAINTAINER Percona Development Team <opensource-dev@percona.com>
 
+RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
                 apt-transport-https ca-certificates \
                 pwgen \
@@ -23,7 +25,7 @@ RUN \
         && apt-get install -y --force-yes \
           percona-server-mongodb-$PERCONA_MAJOR=$PERCONA_VERSION \
         && rm -rf /var/lib/apt/lists/* \
-        && rm -rf /data/db && mkdir -p /data/db \ 
+        && rm -rf /data/db && mkdir -p /data/db \
         && chown -R 1001:0 /data/db
 
 VOLUME ["/data/db"]

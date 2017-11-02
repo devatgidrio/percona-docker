@@ -1,10 +1,10 @@
 FROM debian:jessie
 MAINTAINER Percona Development Team <opensource-dev@percona.com>
 
-RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
                 apt-transport-https ca-certificates \
+                jq \
+                numactl \
                 pwgen \
         && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +17,7 @@ RUN useradd -u 1001 -r -g 0 -s /sbin/nologin \
             -c "Default Application User" mongodb
 
 ENV PERCONA_MAJOR 32
-ENV PERCONA_VERSION 3.2.11-3.1.jessie
+ENV PERCONA_VERSION 3.2.17-3.8.jessie
 
 
 RUN \

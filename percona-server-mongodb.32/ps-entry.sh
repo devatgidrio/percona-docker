@@ -69,7 +69,7 @@ if [ "$1" = 'mongod' ]; then
 	done
 
 	if [ -z "$definitelyAlreadyInitialized" ]; then
-		"$@" --fork --bind_ip 127.0.0.1 --logpath "/proc/$$/fd/1"
+		"$@" --fork --logpath "/proc/$$/fd/1"
 
 		mongo=( mongo --quiet )
 
